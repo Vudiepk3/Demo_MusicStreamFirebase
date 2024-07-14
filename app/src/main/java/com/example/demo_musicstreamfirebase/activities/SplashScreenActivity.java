@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 
 import com.example.demo_musicstreamfirebase.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashScreenActivity extends AppCompatActivity {
     // Biến lưu trữ đối tượng ImageView
@@ -40,7 +42,19 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .start(); // Bắt đầu hiệu ứng
     }
     private void startNewActivity() {
-        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class)); // Chuyển sang MainActivity
-        finish(); // Đóng SplashScreenActivity để người dùng không thể quay lại màn hình này
+        FirebaseAuth auth = FirebaseAuth.getInstance(); // Lấy một instance của FirebaseAuth
+        FirebaseUser currentUser = auth.getCurrentUser(); // Lấy người dùng hiện tại đã đăng nhập
+
+        // Kiểm tra xem người dùng có đăng nhập không
+        if (currentUser != null) {
+            // Nếu người dùng đã đăng nhập, bắt đầu MainActivity
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            // Nếu người dùng chưa đăng nhập, bắt đầu GetStartedActivity
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        // Kết thúc activity hiện tại
+        finish();
     }
 }

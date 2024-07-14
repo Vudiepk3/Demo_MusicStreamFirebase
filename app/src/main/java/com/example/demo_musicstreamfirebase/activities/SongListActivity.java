@@ -1,26 +1,44 @@
 package com.example.demo_musicstreamfirebase.activities;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.demo_musicstreamfirebase.R;
+import android.os.Bundle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import com.example.demo_musicstreamfirebase.adapters.SongsListAdapter;
+import com.example.demo_musicstreamfirebase.databinding.ActivitySongListBinding;
+import com.example.demo_musicstreamfirebase.models.CategoryModel;
 
 public class SongListActivity extends AppCompatActivity {
+
+    private static CategoryModel category;
+
+    private ActivitySongListBinding binding;
+
+    // Getter for category
+    public static CategoryModel getCategory() {
+        return category;
+    }
+
+    // Setter for category
+    public static void setCategory(CategoryModel category) {
+        SongListActivity.category = category;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_song_list);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        binding = ActivitySongListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.nameTextView.setText(category.getName());
+        // Load cover image using Glide
+        // ...
+
+        setupSongsListRecyclerView();
+    }
+
+    private void setupSongsListRecyclerView() {
+        SongsListAdapter songsListAdapter = new SongsListAdapter(category.getSongs());
+        binding.songsListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.songsListRecyclerView.setAdapter(songsListAdapter);
     }
 }

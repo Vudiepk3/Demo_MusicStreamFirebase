@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "867036645108",
+    "project_id": "fir-musicstreamfirebase-ccb6c",
+    "storage_bucket": "fir-musicstreamfirebase-ccb6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867036645108:android:6db831fecc9a73deb700a1",
+        "android_client_info": {
+          "package_name": "com.example.demo_musicstreamfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANYKTreHsyuHbY-sLb2hPMEy3mMD4SbNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
